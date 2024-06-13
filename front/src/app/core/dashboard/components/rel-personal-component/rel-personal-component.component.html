@@ -1,0 +1,105 @@
+<div nz-row>
+  <div nz-col [nzSpan]="12">
+    <h1 nz-typography>Relación de Personal</h1>
+    <p>Aquí puedes revisar registros de personal</p>
+  </div>
+  <div nz-col [nzSpan]="12" class="register-square">
+    <button class="custom-primary-button" nz-button [nzType]="'primary'" type="submit" (click)="onViewRegisterNewPerson()">Registrar Nueva
+      Persona</button>
+  </div>
+</div>
+
+
+<h2 nz-typography>Búsqueda</h2>
+
+<form nz-form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+  <div nz-row [nzGutter]="24">
+
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="24">Puesto</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="position" placeholder="Ej. Director" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="24">Nombres y Apellidos o DNI</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="document" placeholder="Ej. Ortiz Estrada Edith Carolay" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="24">Dependencia</nz-form-label>
+        <nz-form-control>
+          <nz-select formControlName="dependence" nzPlaceHolder="Selecciona una dependencia">
+            <nz-option *ngFor="let dependence of dependencies" [nzLabel]="dependence"
+              [nzValue]="dependence"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <div nz-row>
+    <div nz-col [nzSpan]="24" class="search-area">
+      <button class="custom-primary-button" nz-button [nzType]="'primary'" type="submit">Buscar</button>
+      <button nz-button (click)="onReset()" type="button">Limpiar</button>
+    </div>
+  </div>
+</form>
+<h2 nz-typography>Resultados</h2>
+<div *ngIf="hasResults; else nothing">
+  <nz-table #basicTable [nzData]="filteredPersonalData" class="bordered-table" [nzFrontPagination]="true" [nzShowPagination]="true">    
+    <thead>
+      <tr>
+        <th>Cargo</th>
+        <th>Nombres</th>
+        <th class="centered-column">Nro Doc.</th>
+        <th>Dependencia</th>
+        <th class="centered-column">Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.position }}</td>
+        <td>{{ data.names }}</td>
+        <td class="centered-column">{{ data.document }}</td>
+        <td>{{ data.dependence }}</td>
+
+        <td class="centered-column">
+          <a (click)="onViewDetail(data.id)">
+            <span nz-icon nzType="eye" class="custom-icon"></span>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  
+</div>
+
+<ng-template #nothing>
+  <div *ngIf="!hasResults">
+    <nz-empty></nz-empty>
+  </div>
+</ng-template>
+
+<div *ngIf="stateService.getPersonDetail()" class="modal-background">
+  <div class="modal-content">
+    <button class="close-button" (click)="closePersonDetail()">X</button>
+    <app-personal-detail-component></app-personal-detail-component>
+  </div>
+</div>
+
+<div *ngIf="stateService.getViewNewPerson()" class="modal-background">
+  <div class="modal-content-place">
+    <button class="close-button" (click)="closeNewPerson()">X</button>
+    <app-register-new-person></app-register-new-person>
+  </div>
+</div>

@@ -1,0 +1,152 @@
+<div class="detail-container">
+  <div class="detail-header">
+    <div class="detail-persona">
+      <h2>Datos de la persona</h2>
+      <div class="persona-details">
+        <div class="detail-row">
+          <div class="detail-col">
+            <p><strong>Nombres</strong> <span class="detail-content">{{ personData.names }}</span></p>
+            <p><strong>DNI</strong> <span class="detail-content">{{ personData.document }}</span></p>
+          </div>
+          <div class="detail-col">
+            <p><strong>Teléfono</strong> <span class="detail-content">{{ personData.phoneNumber }}</span></p>
+            <p><strong>Dependencia</strong> <span class="detail-content">{{ personData.dependence }}</span></p>
+          </div>
+          <div class="detail-col">
+            <p><strong>Correo</strong> <span class="detail-content">{{ personData.email }}</span></p>
+            <p><strong>Nro de cont. de emergencia</strong> <span class="detail-content">{{ personData.emergencyPhoneNumber }}</span></p>
+          </div>
+          <div class="detail-col">
+            <p><strong>Edad</strong> <span class="detail-content">{{ personData.age }}</span></p>
+            <p><strong>Sexo</strong> <span class="detail-content">{{ personData.gender }}</span></p>
+          </div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-col">
+            <p class="alergias"><strong>ALERGIAS</strong> <span class="detail-content">{{ personData.allergies }}</span></p>
+          </div>
+          <div class="detail-col">
+            <p><strong>Antecedentes</strong> <span class="detail-content">{{ personData.precedents }}</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="historial-header">
+    <h2>Historial de visitas al tópico</h2>
+    <div class="buttons">
+      <button class="custom-primary-button" nz-button nzType="primary" (click)="refresh()" nzShape="circle">
+        <span nz-icon nzType="sync" nzTheme="outline"></span>
+      </button>
+      <button class="custom-primary-button-visit" [disabled]="this.stateService.getViewButtonNewConsult()" nz-button nzType="primary" (click)="onViewDisabledButtonVisit()">Nueva Visita</button>
+    </div>
+  </div>
+
+  <div *ngIf="!this.dataService.getLoader(); else truespin" class="table-container">
+    <div *ngIf="this.dataService.getHasResults(); else nothing">
+      <nz-table *ngIf="consultationData && consultationData.length > 0" #basicTable nzBordered [nzData]="consultationData" [nzFrontPagination]="false" [nzShowPagination]="false">        
+        <thead>
+          <tr>
+            <th>Fecha visita</th>
+            <th class="centered-column">Triaje</th>
+            <th class="centered-column">Consulta</th>
+            <th class="centered-column">Receta</th>
+            <th class="centered-column">Procedimiento</th>
+            <th class="centered-column">Opciones</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of consultationData; let i = index">
+            <td>{{ data.dateVisit }}</td>
+            <td class="centered-column">
+              <button nz-button nzType="link" *ngIf="data.madeTriage" (click)="viewFormTriage(data.id)">
+                <i nz-icon class="custom-icon" nzType="eye" nzTheme="outline"></i>
+              </button>
+              <i nz-icon *ngIf="!data.madeTriage" nzType="close" nzTheme="outline"></i>
+            </td>
+            <td class="centered-column">
+              <button nz-button nzType="link" *ngIf="data.madeConsultation" (click)="viewFormConsultation(data.id)">
+                <i nz-icon class="custom-icon" nzType="eye" nzTheme="outline"></i>
+              </button>
+              <i nz-icon *ngIf="!data.madeConsultation" nzType="close" nzTheme="outline"></i>
+            </td>
+            <td class="centered-column">
+              <button nz-button nzType="link" *ngIf="data.madeRecipe" (click)="viewFormRecipe(data.id)">
+                <i nz-icon class="custom-icon" nzType="eye" nzTheme="outline"></i>
+              </button>
+              <i nz-icon *ngIf="!data.madeRecipe" nzType="close" nzTheme="outline"></i>
+            </td>
+            <td class="centered-column">
+              <button nz-button nzType="link" *ngIf="data.madeProcedure" (click)="viewFormProcedure(data.id)">
+                <i class="custom-icon" nz-icon nzType="eye" nzTheme="outline"></i>
+              </button>
+              <i nz-icon *ngIf="!data.madeProcedure" nzType="close" nzTheme="outline"></i>
+            </td>
+
+            <td class="centered-column">
+              <div>
+                <button nz-button nz-dropdown [nzDropdownMenu]="activeMenu">
+                  <i nz-icon nzType="ellipsis" nzTheme="outline"></i>
+                </button>
+                <nz-dropdown-menu #activeMenu="nzDropdownMenu">
+                  <ul nz-menu>
+                    <li  (click)="editTriage(data.id)" nz-menu-item>Editar triaje</li>
+                    <li  (click)="editConsultation(data.id)" nz-menu-item>Editar consulta</li>
+                    <li  (click)="editRecipe(data.id)" nz-menu-item>Editar receta</li>
+                    <li  (click)="editProcedure(data.id)" nz-menu-item>Editar procedimiento</li>
+                  </ul>
+                </nz-dropdown-menu>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</div>
+
+<ng-template #nothing>
+  <div>
+    <nz-empty></nz-empty>
+  </div>
+</ng-template>
+
+<ng-template #truespin>
+  <div class="spin">
+    <nz-spin nzSimple></nz-spin>
+  </div>
+</ng-template>
+
+<div *ngIf="this.stateService.getNewConsult()" class="modal-background">
+  <div class="modal-content-consult">
+    <button class="close-button" (click)="closeNewConsult()">X</button>
+    <app-new-consult></app-new-consult>
+  </div>
+</div>
+
+<div *ngIf="this.stateService.getTriage()" class="modal-background">
+  <div class="modal-content-triage">
+    <button class="close-button" (click)="closeTriage()">X</button>
+    <app-new-triage></app-new-triage>
+  </div>
+</div>
+
+
+<div *ngIf="this.stateService.getNewRecipe()" class="modal-background">
+  <div class="modal-content-recipe">
+      <button class="close-button" (click)="closeNewRecipe()">X</button>
+      <app-new-recipe></app-new-recipe>
+  </div>
+</div>
+
+
+<div *ngIf="this.stateService.getAssignmentProcedure()" class="modal-background">
+  <div class="modal-content-procedure">
+      <button class="close-button" (click)="closeAssignmentProcedure()">X</button>
+      <app-assignment-procedure></app-assignment-procedure>
+  </div>
+</div>
+
+

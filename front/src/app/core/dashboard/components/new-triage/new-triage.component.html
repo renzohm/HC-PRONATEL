@@ -1,0 +1,99 @@
+<div class="detail-container">
+    <h2 nz-typography>Nuevo triaje</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+        <div nz-row [nzGutter]="24">
+
+        
+            <div nz-col [nzSpan]="24">
+                <nz-form-item class="form">
+                    <nz-form-label [nzSpan]="24">Frecuencia cardiaca (pulso)</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input formControlName="heartRate" placeholder="Frecuencia cardiaca (pulso)" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col [nzSpan]="24">
+                <nz-form-item class="form">
+                    <nz-form-label [nzSpan]="24">Frecuencia respiratoria</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input formControlName="breathingFrequency" placeholder="Frecuencia respiratoria" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col [nzSpan]="24">
+                <nz-form-item class="form">
+                    <nz-form-label [nzSpan]="24">Presión arterial</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input formControlName="bloodPressure" placeholder="Presión arterial" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col [nzSpan]="24">
+                <nz-form-item class="form">
+                    <nz-form-label [nzSpan]="24">Temperatura corporal</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input formControlName="bodyTemperature" placeholder="Temperatura corporal" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col [nzSpan]="24">
+                <nz-form-item class="form">
+                    <nz-form-label [nzSpan]="24">Saturación de oxígeno (SpO2)</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input formControlName="oxygenSaturation" placeholder="Saturación de oxígeno (SpO2)" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col [nzSpan]="24">
+                <nz-form-item class="form">
+                    <nz-form-label [nzSpan]="24">Nivel de consciencia</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input formControlName="conscienceLevel" placeholder="Nivel de consciencia" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            
+            <div nz-col [nzSpan]="24">
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="24">Escala de glasgow (Abertura ocular)</nz-form-label>
+                    <nz-form-control>
+                        <select nz-select formControlName="glasgowEyeOpening" placeholder="Selecciona la escala de glasgow">
+                            <option value="" disabled selected>Selecciona la escala de glasgow</option>
+                            <option *ngFor="let opcion of glasgowEyeOpening" [value]="opcion.id">{{ opcion.nombre }}</option>                    
+                        </select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <div nz-col [nzSpan]="24">
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="24">Escala de glasgow (Respuesta verbal)</nz-form-label>
+                    <nz-form-control>
+                        <select nz-select formControlName="glasgowVerbalResponse" placeholder="Selecciona la escala de glasgow">
+                            <option value="" disabled selected>Selecciona la escala de glasgow</option>
+                            <option *ngFor="let opcion of glasgowVerbalResponse" [value]="opcion.id">{{ opcion.nombre }}</option>                    
+                        </select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <div nz-col [nzSpan]="24">
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="24">Escala de glasgow (Respuesta motriz)</nz-form-label>
+                    <nz-form-control>
+                        <select nz-select formControlName="glasgowMotorResponse" placeholder="Selecciona la escala de glasgow">
+                            <option value="" disabled selected>Selecciona la escala de glasgow</option>
+                            <option *ngFor="let opcion of glasgowMotorResponse" [value]="opcion.id">{{ opcion.nombre }}</option>                    
+                        </select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+        </div>
+        <div class="container-button">
+            <button class="button-save" nz-button [nzType]="'primary'" type="submit">Guardar</button>
+
+        </div>
+    </form>
+</div>

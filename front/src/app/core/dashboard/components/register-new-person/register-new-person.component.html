@@ -1,0 +1,196 @@
+<div class="detail-container">
+    <h2 nz-typography>Registrar Nueva Persona</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div nz-col [nzSpan]="24">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="24">Tipo de documento</nz-form-label>
+                <nz-form-control>
+                    <select nz-select formControlName="typeDocument" placeholder="Selecciona el tipo de documento">
+                        <option value="" disabled selected>Selecciona el departamento</option>
+                            <option *ngFor="let opcion of opcionesTipoDocumento" [value]="opcion.id">{{ opcion.nombre }}
+                            </select>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+
+        <!-- Contenedor adicional con *ngIf para eliminar espacio no deseado -->
+        <div *ngIf="registerForm.get('typeDocument')!.value as type">
+            <div nz-col [nzSpan]="24">
+                <nz-form-item class="form">
+                    <nz-form-label [nzSpan]="24">
+                        {{ type === '0' ? 'DNI de la persona' : 'CE de la persona' }}
+                    </nz-form-label>
+                    <nz-form-control>
+                        <input nz-input formControlName="document"
+                            [placeholder]="type === '0' ? 'Ingresa el DNI de la persona' : 'Ingresa el CE de la persona'"
+                            [attr.maxlength]="type === '0' ? '8' : '9'" pattern="\d*" inputmode="numeric" />
+                        <!-- Aquí se agregan los mensajes de error para el campo document -->
+                        <!-- Revisa si 'errors' existe antes de intentar acceder a 'dniLength' -->
+                        <div *ngIf="registerForm.get('document')?.errors?.['dniLength']" class="alert alert-danger">
+                            El DNI debe tener exactamente 8 dígitos.
+                        </div>
+                        <div *ngIf="registerForm.get('document')?.errors?.['ceLength']" class="alert alert-danger">
+                            El CE debe tener exactamente 9 dígitos.
+                        </div>
+
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+
+
+
+        <div nz-row [nzGutter]="24">
+            <div nz-col [nzSpan]="24">
+                <nz-form-item class="form">
+                    <nz-form-label [nzSpan]="24">Cargo</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input formControlName="position" placeholder="Cargo" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <div nz-col [nzSpan]="24">
+                <nz-form-item class="form">
+                    <nz-form-label [nzSpan]="24">Nombres</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input formControlName="names" placeholder="Nombres y apellidos" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <div nz-col [nzSpan]="24">
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="24">Género</nz-form-label>
+                    <nz-form-control>
+                        <select nz-select formControlName="gender" placeholder="Selecciona el género">
+                            <option value="" disabled selected>Selecciona el departamento</option>
+                            <option *ngFor="let opcion of opcionesGeneros" [value]="opcion.id">{{ opcion.nombre }}
+                            </option>
+
+                        </select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <div nz-col [nzSpan]="24">
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="24">Dependencia</nz-form-label>
+                    <nz-form-control>
+                        <select nz-select formControlName="dependence" placeholder="Selecciona la dependencia">
+                            <option value="" disabled selected>Selecciona el departamento</option>
+                            <option *ngFor="let opcion of opcionesDepartamentos" [value]="opcion.id">{{ opcion.nombre }}
+                            </option>
+                        </select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+
+
+            <div nz-col [nzSpan]="24">
+                <nz-form-item class="form">
+                    <nz-form-label [nzSpan]="24">Número de celular</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input formControlName="phoneNumber" placeholder="Número de celular" maxlength="9"
+                            pattern="\d*" inputmode="numeric" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col [nzSpan]="24">
+                <nz-form-item class="form">
+                    <nz-form-label [nzSpan]="24">Correo electrónico</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input formControlName="email" placeholder="Correo electrónico" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col [nzSpan]="24">
+                <nz-form-item class="form">
+                    <nz-form-label [nzSpan]="24">Número de contacto de emergencia (opcional)</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input formControlName="emergencyPhoneNumber"
+                            placeholder="Número de contacto de emergencia" maxlength="9" pattern="\d*"
+                            inputmode="numeric" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <div nz-col [nzSpan]="24">
+                <nz-form-item class="form">
+                    <nz-form-label [nzSpan]="24">Antecedentes (opcional)</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input formControlName="precedents" placeholder="Antecedentes" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <div nz-col [nzSpan]="24">
+                <nz-form-item class="form">
+                    <nz-form-label [nzSpan]="24">Fecha de nacimiento</nz-form-label>
+                    <nz-form-control>
+                        <nz-date-picker formControlName="birthdate" nzPlaceHolder="Fecha de nacimiento"
+                            (ngModelChange)="onChange($event)"></nz-date-picker>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <div nz-col [nzSpan]="24">
+                <nz-form-item class="form">
+                    <nz-form-label [nzSpan]="24">Alergias (opcional)</nz-form-label>
+                    <nz-form-control>
+                        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+                            @for (control of listOfControl; track control; let i = $index) {
+                            <nz-form-item>
+                                @if (i === 0) {
+
+                                }
+                                <nz-form-control [nzXs]="24" [nzSm]="20" [nzOffset]="0"
+                                    nzErrorTip="Please input passenger's name or delete this field.">
+                                    <div style="display: flex; align-items: center;">
+                                        <input class="passenger-input" nz-input placeholder="Ingresa la alergia"
+                                            [attr.id]="control.id" [formControlName]="control.controlInstance" />
+                                        <div class="icon-container"> <!-- Contenedor para los íconos -->
+                                            <span nz-icon nzType="minus-circle-o" class="dynamic-delete-button"
+                                                (click)="removeField(control, $event)"></span>
+
+                                        </div>
+                                    </div>
+                                </nz-form-control>
+
+                            </nz-form-item>
+                            }
+                            <nz-form-item class="buttons-container">
+                                <nz-row [nzGutter]="16">
+                                    <nz-col [nzSpan]="12">
+                                        <nz-form-control>
+                                            <button nz-button nzType="dashed" class="add-button"
+                                                (click)="addField($event)">
+                                                <span nz-icon nzType="plus"></span>
+                                                Añadir alergia
+                                            </button>
+                                        </nz-form-control>
+                                    </nz-col>
+                                    <nz-col [nzSpan]="12">
+                                        <nz-form-control>
+                                            <button nz-button nzType="dashed" class="submit-button">Entregar</button>
+                                        </nz-form-control>
+                                    </nz-col>
+                                </nz-row>
+                            </nz-form-item>
+
+                        </form>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+
+
+
+        </div>
+        <div class="container-button">
+            <button class="button-save" nz-button [nzType]="'primary'" type="submit">Guardar</button>
+
+        </div>
+    </form>
+</div>

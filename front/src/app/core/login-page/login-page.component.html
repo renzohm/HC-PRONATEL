@@ -1,0 +1,78 @@
+<body class="login-page">
+
+  <nz-layout>
+    <header class="header">
+      <div class="header-content">
+        <h1>Sistema de Historias Clínicas</h1>
+
+      </div>
+    </header>
+  </nz-layout>
+
+
+  <div class="login-container">
+
+    <div class="image-container">
+      <img src="../../../assets/login-image.jpg" alt="Logo">
+    </div>
+
+    <div nz-flex [nzVertical]=true class="form-container">
+
+      <div nzJustify="center">
+        <h2>Ingresa tu correo institucional para</h2>
+        <h2 class="h2-bot">acceder al Sistema de historias clínicas</h2>
+        <form nzJustify="center" nzAlign="center" nz-form [formGroup]="validateForm" class="login-form"
+          (ngSubmit)="submitForm()">
+
+          <label>Dirección de correo electrónico</label>
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Ingresa tu correo electrónico!">
+              <nz-input-group nzAddOnAfter="@hotmail.com">
+                <input type="text" nz-input formControlName="email" placeholder="Correo electrónico" />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+
+          <label>Contraseña</label>
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Por favor coloca tu contraseña!">
+
+              <nz-input-group [nzSuffix]="suffixTemplate">
+                <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="Contraseña"
+                  formControlName="password" />
+              </nz-input-group>
+
+              <ng-template #suffixTemplate>
+                <span nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye' "
+                  (click)="passwordVisible = !passwordVisible"></span>
+              </ng-template>
+
+
+
+            </nz-form-control>
+
+
+          </nz-form-item>
+
+
+          <div nz-row class="login-form-margin">
+            <div nz-col [nzSpan]="12">
+              <label nz-checkbox>
+                <span>Recuérdame</span>
+              </label>
+            </div>
+            <div nz-col [nzSpan]="12">
+              <a class="login-form-forgot"><u>¿Olvidaste tu contraseña?</u></a>
+            </div>
+          </div>
+          <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Ingresar</button>
+          <nz-divider nzType="horizontal"></nz-divider>
+        </form>
+
+      </div>
+
+    </div>
+
+
+  </div>
+</body>

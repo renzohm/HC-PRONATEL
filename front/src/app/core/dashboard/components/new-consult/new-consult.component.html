@@ -1,0 +1,58 @@
+<div class="detail-container">
+    <h2 nz-typography>Detalles de la consulta</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+        <div nz-row [nzGutter]="24">
+            <div nz-col [nzSpan]="24">
+                <nz-form-item class="form">
+                    <nz-form-label [nzSpan]="24">Resumen del Motivo de la consulta</nz-form-label>
+                    <nz-form-control>
+                        <input  nz-input formControlName="summaryReason" placeholder="Ej. EMERGENCIA" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <div nz-col [nzSpan]="24">
+                <nz-form-item class="form">
+
+                    <nz-form-label [nzSpan]="24">Detalle del Motivo de la consulta</nz-form-label>
+                    <nz-form-control>
+                        <textarea nz-input class="input-detalle" formControlName="detailReason"
+                            placeholder="Ej. El paciente indica que no puede caminar cómodamente"></textarea>
+                    </nz-form-control>
+                </nz-form-item>
+
+            </div>
+
+            <div nz-col [nzSpan]="12">
+                <nz-form-item class="form">
+                    <nz-form-label [nzSpan]="24">CIE 10</nz-form-label>
+                    <nz-form-control>
+                        <input class="cide10" nz-input formControlName="cide10" placeholder="DIDFSISD" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col [nzSpan]="12">
+                <nz-form-item class="form">
+                    <nz-form-label [nzSpan]="24">Diagnostico</nz-form-label>
+                    <nz-form-control>
+                        <input class="input-diagnostico" nz-input formControlName="diagnosis"
+                            placeholder="Ej. Pie de atleta" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+
+
+        </div>
+        <div class="container-button">
+            <button class="button-cancel" (click)="onGoBack()" nz-button type="button">Cancelar</button>
+            <button class="button-save" nz-button [nzType]="'primary'" type="submit">Guardar</button>
+
+        </div>
+
+
+    </form>
+</div>
+
+

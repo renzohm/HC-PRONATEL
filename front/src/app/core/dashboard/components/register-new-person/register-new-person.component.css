@@ -1,0 +1,163 @@
+.detail-container {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+}
+
+nz-form-item .form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+nz-form-label {
+    text-align: left;
+    font-weight: bold;
+}
+
+nz-form-control {
+    width: 100%;
+}
+
+input[nz-input],
+nz-select {
+    border: 1px solid #000;
+    border-radius: 5px;
+
+    height: 40px;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.fecha-ingreso,
+.fecha-resolucion {
+    width: 50%;
+}
+
+.numero-documento {
+    width: 70%;
+}
+
+.fecha-documento {
+    width: 70%;
+}
+
+nz-date-picker {
+    width: 35%;
+    border: 1px solid #000;
+    border-radius: 5px;
+
+    height: 40px;
+    font-size: 16px;
+    padding: 10px;
+}
+
+input {
+    width: 100%;
+}
+
+.nz-select {
+    width: 100% !important;
+}
+
+.condition-select {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+select[nz-select] {
+    width: 100%;
+    height: 40px;
+    padding: 0 10px;
+    border-radius: 4px;
+    border: 1px solid #000;
+    border-radius: 5px;
+
+}
+
+.container-button {
+    display: flex;
+    justify-content: center;
+}
+
+
+.button-save {
+
+    padding: 5px;
+    text-align: center;
+    max-width: 140px;
+    width: 140px;
+    height: 50px;
+    font-size: 18px;
+    background-color:rgb(228, 150, 4);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+
+.upload-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 85%;
+    height: 120px;
+    padding: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #000;
+
+}
+
+.upload-button i {
+    margin-right: 8px;
+    color: red;
+
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+}
+
+.dynamic-delete-button {
+    cursor: pointer;
+    margin-left: 8px;
+    font-size: 24px;
+    color: #999;
+    transition: color 0.3s ease;
+}
+
+.dynamic-delete-button:hover {
+    color: #777;
+}
+
+.passenger-input {
+    flex-grow: 1;
+    margin-right: 8px;
+}
+
+.add-button,
+.submit-button {
+    width: 100%;
+    margin-right: 30px;
+}
+
+.buttons-container {
+    justify-content: center;
+
+}
+
